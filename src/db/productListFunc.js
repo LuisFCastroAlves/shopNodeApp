@@ -1,6 +1,19 @@
 const { ObjectId } = require('mongodb');
 const { connectToDB } = require('./connectToDB');
 
+// ADD PRODUCT
+async function addProduct(params) {
+    try {
+        const productList = await connectToDB('product_list');
+
+        const product = await productList.insertOne(params);
+
+        return product;
+    } catch (error) {
+        console.error("Error:", error)
+    }
+}
+
 // GET ALL PRODUCTS
 async function getProducts() {
     try {
@@ -62,6 +75,7 @@ async function updateProductById(id, params) {
 }
 
 module.exports = {
+    addProduct,
     getProducts,
     getProductById,
     deleteProductById,
