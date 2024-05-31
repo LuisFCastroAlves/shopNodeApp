@@ -45,6 +45,7 @@ async function getUserByEmail(email) {
     }
 }
 
+
 module.exports = {
     userRegister,
     getUserByEmail,
