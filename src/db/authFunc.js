@@ -55,7 +55,7 @@ async function deleteUserById(id) {
 
         await cartFunc.deleteCart(id);
 
-        return user, cart
+        return user
     } catch (error) {
         console.error("Error:", error);
     }
