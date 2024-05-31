@@ -87,19 +87,3 @@ module.exports = {
     updateOrder,
     deleteOrderById
 }
-
-
-// [
-//     {
-//       "product_id_ref": {
-//         "$oid": "664e16475bf80806d8c82971"
-//       },
-//       "quantity": 2
-//     },
-//     {
-//       "product_id_ref": {
-//         "$oid": "6652231f2031e51a6c062475"
-//       },
-//       "quantity": 3
-//     }
-//   ]
