@@ -32,7 +32,7 @@ async function getProductById(id) {
         const productList = await connectToDB('product_list');
         const product = await productList.findOne({
             _id: ObjectId.createFromHexString(id)
-        }).toArray();
+        });
 
         return product;
     } catch (error) {
