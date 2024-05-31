@@ -117,7 +117,7 @@ async function deleteProductFromCart(id, params) {
     try {
 
         const cartList = await connectToDB('cart');
-        const deleteProductFrom = await cartList.updateOne(
+        const deleteProduct = await cartList.updateOne(
             { user_id_ref: ObjectId.createFromHexString(id) },
             {
                 $pull: {
@@ -133,11 +133,28 @@ async function deleteProductFromCart(id, params) {
     }
 }
 
+// DELETE ALL PRODUCTS FROM CART
+async function deleteAllProductsFromCart(id) {
+    const cartList = await connectToDB("cart");
+    const deleteAllProducts = await cartList.updateOne(
+        {
+            user_id_ref: ObjectId.createFromHexString(id)
+        }, 
+        {
+            $set: {
+                "array_products": []
+            }
+        }
+    )
+    return deleteAllProducts
+}
+
 
 module.exports = {
     createCart,
     getCartByUserId,
     addProductToCart,
     updateProductQuantity,
-    deleteProductFromCart
+    deleteProductFromCart,
+    deleteAllProductsFromCart
 }

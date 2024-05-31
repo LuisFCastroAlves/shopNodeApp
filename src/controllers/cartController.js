@@ -33,10 +33,17 @@ async function deleteProductFromCart(req, res) {
     res.json(user_cart);
 }
 
+async function deleteAllProductsFromCart(req, res) {
+    const { id } = req.params;
+    const user_cart = await cartFunc.deleteAllProductsFromCart(id);
+    res.json(user_cart);
+}
+
 module.exports = {
     createCart,
     getCartByUserId,
     addProductToCart,
     updateProductQuantity,
-    deleteProductFromCart
+    deleteProductFromCart,
+    deleteAllProductsFromCart
 }
