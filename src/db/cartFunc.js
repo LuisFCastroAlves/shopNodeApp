@@ -11,7 +11,6 @@ async function createCart(id) {
                 "array_products": []
             }
         )
-        console.log(newCart);
         return newCart
     } catch (error) {
         console.error("Error:", error);
@@ -126,7 +125,7 @@ async function deleteProductFromCart(id, params) {
             }
         );
 
-        return deleteProductFrom;
+        return deleteProduct;
 
     } catch (error) {
         console.error("Error:", error);

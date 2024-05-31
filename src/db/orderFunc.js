@@ -36,47 +36,67 @@ async function createOrder(id, params) {
 
 // GET ORDERS BY USER ID
 async function getOrderByUserId(id) {
-    const orderList = await connectToDB('orders');
-    const userOrders = await orderList.find({
-        user_id_ref: ObjectId.createFromHexString(id)
-    }).toArray();
+    try {
+        const orderList = await connectToDB('orders');
+        const userOrders = await orderList.find({
+            user_id_ref: ObjectId.createFromHexString(id)
+        }).toArray();
 
-    return userOrders;
+        return userOrders;
+    } catch (error) {
+        console.error("Error:", error);
+    }
+
 
 }
 
 // GET ORDER BY ID
 async function getOrderById(id) {
-    const orderList = await connectToDB("orders");
-    const order = await orderList.findOne({
-        _id: ObjectId.createFromHexString(id)
-    });
-    return order
+    try {
+        const orderList = await connectToDB("orders");
+        const order = await orderList.findOne({
+            _id: ObjectId.createFromHexString(id)
+        });
+        return order
+    } catch (error) {
+        console.error("Error:", error);
+    }
+
 }
 
 // UPDATE ORDER
 async function updateOrder(id, params) {
-    const orderList = await connectToDB("orders");
-    const order = await orderList.updateOne(
-        {
-            _id: ObjectId.createFromHexString(id)
-        },
-        {
-            $set: params,
-        }
-    )
-    return order;
+    try {
+        const orderList = await connectToDB("orders");
+        const order = await orderList.updateOne(
+            {
+                _id: ObjectId.createFromHexString(id)
+            },
+            {
+                $set: params,
+            }
+        )
+        return order;
+    } catch (error) {
+        console.error("Error:", error);
+    }
+
 }
 
 // DELETE ORDER BY ID
 async function deleteOrderById(id) {
-    const orderList = await connectToDB("orders");
-    const order = await orderList.deleteOne(
-        {
-            _id: ObjectId.createFromHexString(id)
-        }
-    )
-    return order;
+    try {
+        const orderList = await connectToDB("orders");
+        const order = await orderList.deleteOne(
+            {
+                _id: ObjectId.createFromHexString(id)
+            }
+        )
+        return order;
+    } catch (error) {
+        console.error("Error:", error);
+    }
+
 }
 
 
