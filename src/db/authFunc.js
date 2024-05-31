@@ -1,4 +1,5 @@
-const { createCart } = require('./cartFunc');
+const { ObjectId } = require('mongodb');
+const cartFunc = require('./cartFunc');
 const { connectToDB } = require('./connectToDB');
 
 async function userRegister(userParams, hash) {
@@ -16,7 +17,7 @@ async function userRegister(userParams, hash) {
             )
 
             const userInfo = await getUserByEmail(userParams.email);
-            await createCart(userInfo._id.toString())
+            await cartFunc.createCart(userInfo._id.toString())
 
             return newUser;
         }
@@ -45,8 +46,23 @@ async function getUserByEmail(email) {
     }
 }
 
+async function deleteUserById(id) {
+    try {
+        const users = await connectToDB("users");
+        const user = await users.deleteOne({
+            "_id": ObjectId.createFromHexString(id),
+        })
+
+        await cartFunc.deleteCart(id);
+
+        return user, cart
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
 
 module.exports = {
     userRegister,
     getUserByEmail,
+    deleteUserById
 }

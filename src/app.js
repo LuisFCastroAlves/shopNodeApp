@@ -7,6 +7,7 @@ const authRouter = require("./routes/authRouter")
 //ROUTES ADMIN
 const productRouter_Admin = require("./routes/admin/productRouter_Admin")
 const orderRouter_Admin = require("./routes/admin/orderRouter_Admin")
+const authRouter_Admin = require("./routes/admin/authRouter_Admin")
 
 
 //# EXPRESS & CORS
@@ -29,6 +30,7 @@ app.use("/user", authRouter);
 // Private Routes
 app.use("/admin/products", productRouter_Admin)
 app.use("/admin/order", orderRouter_Admin)
+app.use("/admin/user", authRouter_Admin)
 
 app.listen(port, function () {
     console.log(`Listening on ${port}`);

@@ -58,7 +58,27 @@ async function userLogin(req, res) {
 
 }
 
+async function deleteUserById(req, res) {
+    const { id } = req.params;
+    const user = await authFunc.deleteUserById(id);
+
+    if (!user) {
+        res.status(400).json({
+            status: "Error",
+            message: "User Not Found"
+        });
+        return;
+    }
+
+    res.json({
+        status: "Deleted",
+        message: "User deleted",
+        user
+    });
+}
+
 module.exports = {
     userRegister,
-    userLogin
+    userLogin,
+    deleteUserById
 }
