@@ -4,7 +4,6 @@ const { getCartByUserId } = require('./cartFunc');
 const { getProductById } = require('./productListFunc');
 
 // CREATE ORDER
-
 async function createOrder(id, params) {
     try {
         const orderList = await connectToDB('orders');
@@ -45,7 +44,45 @@ async function getOrderByUserId(id) {
 
 }
 
+// GET ORDER BY ID
+async function getOrderById(id) {
+    const orderList = await connectToDB("orders");
+    const order = await orderList.findOne({
+        _id: ObjectId.createFromHexString(id)
+    });
+    return order
+}
+
+// UPDATE ORDER
+async function updateOrder(id, params) {
+    const orderList = await connectToDB("orders");
+    const order = await orderList.updateOne(
+        {
+            _id: ObjectId.createFromHexString(id)
+        },
+        {
+            $set: params,
+        }
+    )
+    return order;
+}
+
+// DELETE ORDER BY ID
+async function deleteOrderById(id) {
+    const orderList = await connectToDB("orders");
+    const order = await orderList.deleteOne(
+        {
+            _id: ObjectId.createFromHexString(id)
+        }
+    )
+    return order;
+}
+
+
 module.exports = {
     createOrder,
-    getOrderByUserId
+    getOrderByUserId,
+    getOrderById,
+    updateOrder,
+    deleteOrderById
 }

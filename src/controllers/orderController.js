@@ -13,7 +13,29 @@ async function getOrderByUserId(req, res) {
     res.json(orders);
 }
 
+async function getOrderById(req, res) {
+    const {id} = req.params;
+    const order = await orderFunc.getOrderById(id);
+    res.json(order);
+}
+
+async function updateOrder(req, res) {
+    const {id} = req.params;
+    const params = req.body;
+    const order = await orderFunc.updateOrder(id, params);
+    res.json(order);
+}
+
+async function deleteOrderById(req, res) {
+    const {id} = req.params;
+    const order = await orderFunc.deleteOrderById(id);
+    res.json(order);
+}
+
 module.exports = {
     createOrder,
-    getOrderByUserId
+    getOrderByUserId,
+    getOrderById,
+    updateOrder,
+    deleteOrderById
 }
