@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const jwtSecret = "superSecretPrivateKey";
 
 function createToken(userId, email) {
-
+    
     const tokenPayload = {
         userId,
         email

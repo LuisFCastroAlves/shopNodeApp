@@ -48,12 +48,13 @@ async function userLogin(req, res) {
         return;
     }
 
-    const token = jwtService.createToken(user.id, user.email);
+    const token = jwtService.createToken(user._id.toString(), user.email);
 
     res.json({
         status: "Ok",
         message: "User logged in",
-        token
+        token, 
+        id: user._id,
     });
 
 }
