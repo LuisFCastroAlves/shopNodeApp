@@ -31,7 +31,7 @@ async function getCartByUserId(id) {
     }
 }
 
-// ADD PRODUCT TO CART [PREGUNTAR SI ES MEJOR USAR POST O PUT]
+// ADD PRODUCT TO CART 
 async function addProductToCart(id, params) {
     try {
         const userCart = await getCartByUserId(id);

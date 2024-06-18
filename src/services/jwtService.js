@@ -20,6 +20,7 @@ function verifyToken(token) {
     let payload;
     try {
         payload = jwt.verify(token, jwtSecret);
+        console.log(payload);
     } catch (error) {
         console.log(error);
     }

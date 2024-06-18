@@ -84,6 +84,7 @@ Submission deadline is on the `31st of June` To submit the project, send us an e
 ## Order:
   * Public:
      * Create Order            | [POST]    - { /order/create/:id }
+     * Get All Orders          | [GET]     - { /order/user/:id }
      * Get Order By User Id    | [GET]     - { /order/user/:id }
      * Get Order By Id         | [GET]     - { /order/:id }
   * Admin:

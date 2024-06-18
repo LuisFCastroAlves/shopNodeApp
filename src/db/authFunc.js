@@ -17,12 +17,12 @@ async function userRegister(userParams, hash) {
             )
 
             const userInfo = await getUserByEmail(userParams.email);
-            await cartFunc.createCart(userInfo._id.toString())
+            await cartFunc.createCart(userInfo._id.toString());
 
             return newUser;
         }
 
-        return false
+        return false;
 
     } catch (error) {
         console.error("Error:", error);
