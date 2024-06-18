@@ -11,7 +11,6 @@ async function createCart(id) {
                 "array_products": []
             }
         )
-        console.log(newCart);
         return newCart
     } catch (error) {
         console.error("Error:", error);
@@ -32,7 +31,7 @@ async function getCartByUserId(id) {
     }
 }
 
-// ADD PRODUCT TO CART [PREGUNTAR SI ES MEJOR USAR POST O PUT]
+// ADD PRODUCT TO CART 
 async function addProductToCart(id, params) {
     try {
         const userCart = await getCartByUserId(id);
@@ -126,7 +125,7 @@ async function deleteProductFromCart(id, params) {
             }
         );
 
-        return deleteProductFrom;
+        return deleteProduct;
 
     } catch (error) {
         console.error("Error:", error);
@@ -139,7 +138,7 @@ async function deleteAllProductsFromCart(id) {
     const deleteAllProducts = await cartList.updateOne(
         {
             user_id_ref: ObjectId.createFromHexString(id)
-        }, 
+        },
         {
             $set: {
                 "array_products": []
@@ -149,6 +148,20 @@ async function deleteAllProductsFromCart(id) {
     return deleteAllProducts
 }
 
+// DELETE CART BY USER ID
+async function deleteCart(id) {
+    try {
+        const cartList = await connectToDB("cart");
+        const cart = await cartList.deleteOne({
+            "user_id_ref": ObjectId.createFromHexString(id)
+        })
+
+        return cart;
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
 
 module.exports = {
     createCart,
@@ -156,5 +169,6 @@ module.exports = {
     addProductToCart,
     updateProductQuantity,
     deleteProductFromCart,
-    deleteAllProductsFromCart
+    deleteAllProductsFromCart,
+    deleteCart
 }

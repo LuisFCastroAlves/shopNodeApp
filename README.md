@@ -49,3 +49,50 @@ Submission deadline is on the `31st of June` To submit the project, send us an e
 * Project:
   * Link to your project’s Github repository or repositories
 * Send it to Helder
+
+
+
+# ROUTES
+
+## Auth:
+  * Public
+     * User Register | [POST]   - { /user/register }
+     * User Log In   | [POST]   - { /user/login }
+  * Admin
+     * User Delete   | [DELETE] - { /admin/user/remove/:id }
+
+## Products:
+  * Public:
+     * Get All Products      | [GET]  - { /products/all }
+     * Get Product By ID     | [GET]  - { /products/:id }
+  * Admin:
+     * Get All Products      | [GET]  - { /admin/products/all }
+     * Get Product By ID     | [GET]  - { /admin/products/:id }
+     * Add Product           | [POST] - { /admin/products/add }
+     * Update Product By ID  | [PUT]  - { /admin/products/update/:id }
+     * Delete Product By ID  | [PUT]  - { /admin/products/remove/:id }
+
+## Cart:
+  * Public:
+     * Create Cart                   | [POST] - { /cart/create/:id }
+     * Get Cart By User Id           | [GET]  - { /cart/:id }
+     * Add Product To Cart           | [PUT]  - { /cart/add/:id }
+     * Update Product Quantity       | [PUT]  - { /cart/update/quantity/:id }
+     * Remove Product From Cart      | [PUT]  - { /cart/remove/:id }
+     * Remove All Products From Cart | [PUT]  - { /cart/remove/all/:id }
+
+## Order:
+  * Public:
+     * Create Order            | [POST]    - { /order/create/:id }
+     * Get All Orders          | [GET]     - { /order/user/:id }
+     * Get Order By User Id    | [GET]     - { /order/user/:id }
+     * Get Order By Id         | [GET]     - { /order/:id }
+  * Admin:
+     * Get Order By User Id    | [GET]     - { /order/user/:id }
+     * Get Order By Id         | [GET]     - { /order/:id }
+     * Update Order Status     | [PUT]     - { /order/update/:id }
+     * Delete Order By Id      | [DELETE]  - { /order/delete/:id }
+
+
+
+
