@@ -1,9 +1,10 @@
 const router = require("express").Router();
 const orderController = require("../../controllers/orderController");
+const authMiddleware = require("../../middleware/authMiddleware");
 
-router.get("/user/:id", orderController.getOrderByUserId);
-router.get("/:id", orderController.getOrderById);
-router.put("/update/:id", orderController.updateOrder);
-router.delete("/delete/:id", orderController.deleteOrderById);
+router.get("/user/:id", authMiddleware, orderController.getOrderByUserId);
+router.get("/:id", authMiddleware, orderController.getOrderById);
+router.put("/update/:id", authMiddleware, orderController.updateOrder);
+router.delete("/delete/:id", authMiddleware, orderController.deleteOrderById);
 
 module.exports = router;

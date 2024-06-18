@@ -7,6 +7,11 @@ async function createOrder(req, res) {
     res.json(order);
 }
 
+async function getAllOrders(req, res) {
+    const orders = await orderFunc.getAllOrders();
+    res.json(orders);
+}
+
 async function getOrderByUserId(req, res) {
     const {id} = req.params;
     const orders = await orderFunc.getOrderByUserId(id);
@@ -34,6 +39,7 @@ async function deleteOrderById(req, res) {
 
 module.exports = {
     createOrder,
+    getAllOrders,
     getOrderByUserId,
     getOrderById,
     updateOrder,

@@ -34,6 +34,18 @@ async function createOrder(id, params) {
 
 }
 
+// Get All Orders
+async function getAllOrders() {
+    try {
+        const ordersList = await connectToDB('orders');
+        const orders = await ordersList.find({}).toArray();
+
+        return orders;
+    } catch (error) {
+        console.error("Error:", error)
+    }
+}
+
 // GET ORDERS BY USER ID
 async function getOrderByUserId(id) {
     try {
@@ -102,6 +114,7 @@ async function deleteOrderById(id) {
 
 module.exports = {
     createOrder,
+    getAllOrders,
     getOrderByUserId,
     getOrderById,
     updateOrder,
