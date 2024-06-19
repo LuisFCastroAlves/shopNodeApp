@@ -1,7 +1,7 @@
 const orderFunc = require('../db/orderFunc');
 
 async function createOrder(req, res) {
-    const {id} = req.params;
+    const  id  = req.userData.userId;
     const params = req.body;
     const order = await orderFunc.createOrder(id, params);
     res.json(order);
@@ -14,6 +14,13 @@ async function getAllOrders(req, res) {
 
 async function getOrderByUserId(req, res) {
     const {id} = req.params;
+    const orders = await orderFunc.getOrderByUserId(id);
+    res.json(orders);
+}
+
+
+async function getOrderByUserIdToken(req, res) {
+    const  id  = req.userData.userId;
     const orders = await orderFunc.getOrderByUserId(id);
     res.json(orders);
 }
@@ -41,6 +48,7 @@ module.exports = {
     createOrder,
     getAllOrders,
     getOrderByUserId,
+    getOrderByUserIdToken,
     getOrderById,
     updateOrder,
     deleteOrderById

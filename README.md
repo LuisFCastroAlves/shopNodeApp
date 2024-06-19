@@ -59,6 +59,8 @@ Submission deadline is on the `31st of June` To submit the project, send us an e
      * User Register | [POST]   - { /user/register }
      * User Log In   | [POST]   - { /user/login }
   * Admin
+     * User Register | [POST]   - { admin/user/register }
+     * User Log In   | [POST]   - { admin/user/login }
      * User Delete   | [DELETE] - { /admin/user/remove/:id }
 
 ## Products:
@@ -83,15 +85,16 @@ Submission deadline is on the `31st of June` To submit the project, send us an e
 
 ## Order:
   * Public:
-     * Create Order            | [POST]    - { /order/create/:id }
-     * Get All Orders          | [GET]     - { /order/user/:id }
-     * Get Order By User Id    | [GET]     - { /order/user/:id }
-     * Get Order By Id         | [GET]     - { /order/:id }
+     * Create Order                 | [POST]    - { /order/create/:id }
+     * Get All Orders               | [GET]     - { /order/user/:id }
+     * Get Order By User IdToken    | [GET]     - { /order/user/:id }
+     * Get Order By Id              | [GET]     - { /order/:id }
   * Admin:
-     * Get Order By User Id    | [GET]     - { /order/user/:id }
-     * Get Order By Id         | [GET]     - { /order/:id }
-     * Update Order Status     | [PUT]     - { /order/update/:id }
-     * Delete Order By Id      | [DELETE]  - { /order/delete/:id }
+     * Get All Orders               | [GET]     - { admin/order/user/:id }
+     * Get Order By User Id         | [GET]     - { admin/order/user/:id }
+     * Get Order By Id              | [GET]     - { admin/order/:id }
+     * Update Order Status          | [PUT]     - { admin/order/update/:id }
+     * Delete Order By Id           | [DELETE]  - { admin/order/delete/:id }
 
 
 

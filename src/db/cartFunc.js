@@ -116,11 +116,12 @@ async function deleteProductFromCart(id, params) {
     try {
 
         const cartList = await connectToDB('cart');
+        console.log(params);
         const deleteProduct = await cartList.updateOne(
             { user_id_ref: ObjectId.createFromHexString(id) },
             {
                 $pull: {
-                    "array_products": { "product_id_ref": params.product_id_ref }
+                    "array_products": { "product_id_ref": ObjectId.createFromHexString(params.product_id_ref) }
                 }
             }
         );
