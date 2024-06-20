@@ -62,6 +62,7 @@ Submission deadline is on the `31st of June` To submit the project, send us an e
      * User Register | [POST]   - { admin/user/register }
      * User Log In   | [POST]   - { admin/user/login }
      * User Delete   | [DELETE] - { /admin/user/remove/:id }
+     * Falta hacer UPDATE de info del usuario y del Admin... [Name, Email, Password/Hash]
 
 ## Products:
   * Public:
@@ -94,6 +95,7 @@ Submission deadline is on the `31st of June` To submit the project, send us an e
      * Get Order By Id              | [GET]     - { admin/order/:id }
      * Update Order Status          | [PUT]     - { admin/order/update/:id }
      * Delete Order By Id           | [DELETE]  - { admin/order/delete/:id }
+
 
 
 
