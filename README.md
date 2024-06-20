@@ -77,17 +77,16 @@ Submission deadline is on the `31st of June` To submit the project, send us an e
 ## Cart:
   * Public:
      * Create Cart                   | [POST] - { /cart/create/:id }
-     * Get Cart By User Id           | [GET]  - { /cart/:id }
-     * Add Product To Cart           | [PUT]  - { /cart/add/:id }
-     * Update Product Quantity       | [PUT]  - { /cart/update/quantity/:id }
-     * Remove Product From Cart      | [PUT]  - { /cart/remove/:id }
-     * Remove All Products From Cart | [PUT]  - { /cart/remove/all/:id }
+     * Get Cart By User Id           | [GET]  - { /cart }
+     * Add Product To Cart           | [PUT]  - { /cart/add }
+     * Update Product Quantity       | [PUT]  - { /cart/update/quantity }
+     * Remove Product From Cart      | [PUT]  - { /cart/remove }
+     * Remove All Products From Cart | [PUT]  - { /cart/remove/all }
 
 ## Order:
   * Public:
-     * Create Order                 | [POST]    - { /order/create/:id }
-     * Get All Orders               | [GET]     - { /order/user/:id }
-     * Get Order By User IdToken    | [GET]     - { /order/user/:id }
+     * Create Order                 | [POST]    - { /order/create }
+     * Get Order By User IdToken    | [GET]     - { /order/user }
      * Get Order By Id              | [GET]     - { /order/:id }
   * Admin:
      * Get All Orders               | [GET]     - { admin/order/user/:id }
