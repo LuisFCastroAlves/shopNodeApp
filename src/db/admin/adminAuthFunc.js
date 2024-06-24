@@ -48,13 +48,64 @@ async function getAdminByEmail(email) {
 async function deleteAdminById(id) {
     try {
         const admins = await connectToDB("admins");
-        const user = await admins.deleteOne({
+        const admin = await admins.deleteOne({
             "_id": ObjectId.createFromHexString(id),
         })
 
         await cartFunc.deleteCart(id);
 
-        return user
+        return admin
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+async function updateAdminName(id, params) {
+    try {
+        const admins = await connectToDB("admins");
+        const admin = await admins.updateOne(
+            {
+                _id: ObjectId.createFromHexString(id)
+            },
+            {
+                $set: { name: params },
+            }
+        )
+        return admin;
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+async function updateAdminEmail(id, params) {
+    try {
+        const admins = await connectToDB("admins");
+        const admin = await admins.updateOne(
+            {
+                _id: ObjectId.createFromHexString(id)
+            },
+            {
+                $set: { email: params },
+            }
+        )
+        return admin;
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+async function updateAdminPassword(id, params) {
+    try {
+        const admins = await connectToDB("admins");
+        const admin = await admins.updateOne(
+            {
+                _id: ObjectId.createFromHexString(id)
+            },
+            {
+                $set: { hash: params },
+            }
+        )
+        return admin;
     } catch (error) {
         console.error("Error:", error);
     }
@@ -63,5 +114,8 @@ async function deleteAdminById(id) {
 module.exports = {
     adminRegister,
     getAdminByEmail,
-    deleteAdminById
+    deleteAdminById,
+    updateAdminName,
+    updateAdminEmail,
+    updateAdminPassword
 }

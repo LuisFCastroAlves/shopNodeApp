@@ -53,8 +53,7 @@ async function adminLogin(req, res) {
     res.json({
         status: "Ok",
         message: "Admin logged in",
-        token, 
-        id: admin._id,
+        token
     });
 
 }
@@ -78,8 +77,54 @@ async function deleteAdminById(req, res) {
     });
 }
 
+async function updateAdminName(req, res) {
+    const id = req.userData.userId;
+    const { name } = req.body;
+    const admin = await authFunc.updateAdminName(id, name)
+    res.json({
+        status: "OK",
+        message: "Admin Name Updated",
+        admin
+    })
+}
+
+async function updateAdminEmail(req, res) {
+    const id = req.userData.userId;
+    const { email } = req.body;
+    const emailExist = await authFunc.getAdminByEmail(email);
+
+    if (!emailExist) {
+        const admin = await authFunc.updateAdminEmail(id, email);
+        res.json({
+            status: "OK",
+            message: "Email Updated",
+            admin
+        })
+    } else {
+        res.json({
+            status: "Error",
+            message: "The email is already being used"
+        })
+    }
+}
+
+async function updateAdminPassword(req, res) {
+    const id = req.userData.userId;
+    const { password } = req.body;
+    const hash = await argon2.hash(password);
+    const admin = await authFunc.updateAdminPassword(id, hash)
+    res.json({
+        status: "OK",
+        message: "Password Updated",
+        admin
+    })
+}
+
 module.exports = {
     adminRegister,
     adminLogin,
-    deleteAdminById
+    deleteAdminById,
+    updateAdminName,
+    updateAdminEmail,
+    updateAdminPassword
 }

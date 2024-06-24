@@ -61,8 +61,62 @@ async function deleteUserById(id) {
     }
 }
 
+async function updateUserName(id, params) {
+    try {
+        const users = await connectToDB("users");
+        const user = await users.updateOne(
+            {
+                _id: ObjectId.createFromHexString(id)
+            },
+            {
+                $set: { name: params },
+            }
+        )
+        return user;
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+async function updateUserEmail(id, params) {
+    try {
+        const users = await connectToDB("users");
+        const user = await users.updateOne(
+            {
+                _id: ObjectId.createFromHexString(id)
+            },
+            {
+                $set: { email: params },
+            }
+        )
+        return user;
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+async function updateUserPassword(id, params) {
+    try {
+        const users = await connectToDB("users");
+        const user = await users.updateOne(
+            {
+                _id: ObjectId.createFromHexString(id)
+            },
+            {
+                $set: { hash: params },
+            }
+        )
+        return user;
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
 module.exports = {
     userRegister,
     getUserByEmail,
-    deleteUserById
+    deleteUserById,
+    updateUserName,
+    updateUserEmail,
+    updateUserPassword
 }
