@@ -98,7 +98,7 @@ Submission deadline is on the `31st of June` To submit the project, send us an e
      * User Name Update       | [PUT]    - { /user/update/name}
 
         ```
-          Require token in header
+          Require User token in header
 
           Body JSON
           {
@@ -122,7 +122,7 @@ Submission deadline is on the `31st of June` To submit the project, send us an e
      * User Email Update      | [PUT]    - { /user/update/email }
 
         ```
-          Require token in header
+          Require User token in header
 
           Body JSON
           {
@@ -146,7 +146,7 @@ Submission deadline is on the `31st of June` To submit the project, send us an e
      * User Password Update   | [PUT]    - { /user/update/password }
 
         ```
-          Require token in header
+          Require User token in header
 
           Body JSON
           {
@@ -389,104 +389,18 @@ Submission deadline is on the `31st of June` To submit the project, send us an e
   * Public
 
      * Get All Products      | [GET]  - { /products/all }
-                                        
-        ```
-          Res JSON
-          [
-            {
-              "_id": "664e16475bf80806d8c82971",
-              "product_name": "Prisma Pinot Noir Rosé",
-              "description": {
-                "alc_vol": "13%",
-                "location": "Casablanca, Itata, and Maule"
-              },
-              "price": 17,
-              "discount": 0,
-              "image_url": "https://132373155.cdn6.editmysite.com/uploads/1/3/2/3/132373155/s778301575987528839_p33_i1_w2560.jpeg?width=2400&optimize=medium"
-            },
-            {
-              "_id": "6652231f2031e51a6c062475",
-              "product_name": "Viño Do Porto",
-              "description": {
-                "alc_vol": "11%",
-                "location": "Porto, Portugal"
-              },
-              "price": 25,
-              "discount": 0,
-              "image_url": "https://www.winespiritus.com/5767-large_default/porto-ferreira-tawny-vino-oporto.jpg"
-            }
-          ]
-        ```
 
      * Get Product By ID     | [GET]  - { /products/:id }
-                                        
-        ```
-          Res JSON
-          {
-            "_id": "664e16475bf80806d8c82971",
-            "product_name": "Prisma Pinot Noir Rosé",
-            "description": {
-              "alc_vol": "13%",
-              "location": "Casablanca, Itata, and Maule"
-            },
-            "price": 17,
-            "discount": 0,
-            "image_url": "https://132373155.cdn6.editmysite.com/uploads/1/3/2/3/132373155/s778301575987528839_p33_i1_w2560.jpeg?width=2400&optimize=medium"
-          }
-        ```
 
   * Private:
      * Get All Products      | [GET]  - { /admin/products/all }
-                                             
-        ```
-          Res JSON
-          [
-            {
-              "_id": "664e16475bf80806d8c82971",
-              "product_name": "Prisma Pinot Noir Rosé",
-              "description": {
-                "alc_vol": "13%",
-                "location": "Casablanca, Itata, and Maule"
-              },
-              "price": 17,
-              "discount": 0,
-              "image_url": "https://132373155.cdn6.editmysite.com/uploads/1/3/2/3/132373155/s778301575987528839_p33_i1_w2560.jpeg?width=2400&optimize=medium"
-            },
-            {
-              "_id": "6652231f2031e51a6c062475",
-              "product_name": "Viño Do Porto",
-              "description": {
-                "alc_vol": "11%",
-                "location": "Porto, Portugal"
-              },
-              "price": 25,
-              "discount": 0,
-              "image_url": "https://www.winespiritus.com/5767-large_default/porto-ferreira-tawny-vino-oporto.jpg"
-            }
-          ]
-        ```
 
      * Get Product By ID     | [GET]  - { /admin/products/:id }
                                         
-        ```
-          Res JSON
-          {
-            "_id": "664e16475bf80806d8c82971",
-            "product_name": "Prisma Pinot Noir Rosé",
-            "description": {
-              "alc_vol": "13%",
-              "location": "Casablanca, Itata, and Maule"
-            },
-            "price": 17,
-            "discount": 0,
-            "image_url": "https://132373155.cdn6.editmysite.com/uploads/1/3/2/3/132373155/s778301575987528839_p33_i1_w2560.jpeg?width=2400&optimize=medium"
-          }
-        ```
-
      * Add Product           | [POST] - { /admin/products/add }
                                    
         ```
-          Require Admin  token in header
+          Require Admin token in header
           
           Body JSON
           {
@@ -510,7 +424,7 @@ Submission deadline is on the `31st of June` To submit the project, send us an e
      * Update Product By ID  | [PUT]  - { /admin/products/update/:id }
                                    
         ```
-          Require Admin  token in header
+          Require Admin token in header
           
           Body JSON
           {
@@ -530,26 +444,313 @@ Submission deadline is on the `31st of June` To submit the project, send us an e
 
      * Delete Product By ID  | [PUT]  - { /admin/products/remove/:id }
 
+        ```
+          Require Admin token in header
+
+          Res JSON
+          {
+            "acknowledged": true,
+            "deletedCount": 1
+          }
+        ```
+
 ## Cart:
   * Public:
-     * Create Cart                   | [POST] - { /cart/create/:id }
-     * Get Cart By User Id           | [GET]  - { /cart }
+     * Get Cart          | [GET]  - { /cart }
+     
+        ```
+          Require User token in header
+        ```
+
      * Add Product To Cart           | [PUT]  - { /cart/add }
+                                   
+        ```
+          Require User token in header
+          
+          Body JSON
+          {
+            "product_id_ref": "664e16475bf80806d8c82971",
+	          "quantity": 3
+          }
+
+          Res JSON
+          {
+            "acknowledged": true,
+            "modifiedCount": 1,
+            "upsertedId": null,
+            "upsertedCount": 0,
+            "matchedCount": 1
+          }
+        ```
+
      * Update Product Quantity       | [PUT]  - { /cart/update/quantity }
+                                   
+        ```
+          Require User token in header
+          
+          Body JSON
+          {
+            "product_id_ref": "664e16475bf80806d8c82971",
+	          "quantity": 3
+          }
+
+          Res JSON
+          {
+            "acknowledged": true,
+            "modifiedCount": 1,
+            "upsertedId": null,
+            "upsertedCount": 0,
+            "matchedCount": 1
+          }
+        ```
+
      * Remove Product From Cart      | [PUT]  - { /cart/remove }
-     * Remove All Products From Cart | [PUT]  - { /cart/remove/all }
+                                        
+        ```
+          Require User token in header
+          
+          Body JSON
+          {
+            "product_id_ref": "664e16475bf80806d8c82971",
+	          "quantity": 3
+          }
+
+          Res JSON
+          {
+            "acknowledged": true,
+            "modifiedCount": 1,
+            "upsertedId": null,
+            "upsertedCount": 0,
+            "matchedCount": 1
+          }
+        ```
 
 ## Order:
   * Public:
      * Create Order                 | [POST]    - { /order/create }
-     * Get Order By User IdToken    | [GET]     - { /order/user }
+                                        
+        ```
+          Require User token in header
+          
+          Body JSON
+          {
+            "payment_method": "Cash",
+            "payment_price": "50",
+            "address": "Infantado, Loures, Lisboa, Portugal"
+          }
+
+          Res JSON
+          {
+            "acknowledged": true,
+            "insertedId": "6679bfb09e6e4926249f807c"
+          }
+        ```
+
+     * Get Orders                   | [GET]     - { /order/all }
+                                             
+        ```
+          Require User token in header
+          
+          Res JSON
+          [
+            {
+              "_id": "6679c11d9e6e4926249f807d",
+              "user_id_ref": "6679a5ad34d16079429376bb",
+              "payment_method": "Cash",
+              "payment_price": "50",
+              "status": "pending",
+              "address": "Infantado, Loures, Lisboa, Portugal",
+              "array_products": [
+                {
+                  "product": {
+                    "_id": "664e16475bf80806d8c82971",
+                    "product_name": "Prisma Pinot Noir Rosé",
+                    "description": {
+                      "alc_vol": "13",
+                      "location": "Casablanca, Itata, and Maule"
+                    },
+                    "price": 17,
+                    "discount": 0,
+                    "image_url": "https://132373155.cdn6.editmysite.com/uploads/1/3/2/3/132373155/s778301575987528839_p33_i1_w2560.jpeg?width=2400&optimize=medium"
+                  },
+                  "quantity": 2
+                }
+              ]
+            },
+            {
+              "_id": "6679c1b19e6e4926249f807f",
+              "user_id_ref": "6679a5ad34d16079429376bb",
+              "payment_method": "Cash",
+              "payment_price": "142",
+              "status": "pending",
+              "address": "Infantado, Loures, Lisboa, Portugal",
+              "array_products": [
+                {
+                  "product": {
+                    "_id": "6652231f2031e51a6c062475",
+                    "product_name": "Viño Do Porto",
+                    "description": {
+                      "alc_vol": "11",
+                      "location": "Porto, Portugal"
+                    },
+                    "price": 25,
+                    "discount": 0,
+                    "image_url": "https://www.winespiritus.com/5767-large_default/porto-ferreira-tawny-vino-oporto.jpg"
+                  },
+                  "quantity": 5
+                },
+                {
+                  "product": {
+                    "_id": "664e16475bf80806d8c82971",
+                    "product_name": "Prisma Pinot Noir Rosé",
+                    "description": {
+                      "alc_vol": "13",
+                      "location": "Casablanca, Itata, and Maule"
+                    },
+                    "price": 17,
+                    "discount": 0,
+                    "image_url": "https://132373155.cdn6.editmysite.com/uploads/1/3/2/3/132373155/s778301575987528839_p33_i1_w2560.jpeg?width=2400&optimize=medium"
+                  },
+                  "quantity": 2
+                }
+              ]
+            }
+          ]
+        ```
+
      * Get Order By Id              | [GET]     - { /order/:id }
+
+        ```
+          Require User token in header
+          
+          Res JSON
+          {
+            "_id": "6679c1b19e6e4926249f807f",
+            "user_id_ref": "6679a5ad34d16079429376bb",
+            "payment_method": "Cash",
+            "payment_price": "142",
+            "status": "pending",
+            "address": "Infantado, Loures, Lisboa, Portugal",
+            "array_products": [
+              {
+                "product": {
+                  "_id": "6652231f2031e51a6c062475",
+                  "product_name": "Viño Do Porto",
+                  "description": {
+                    "alc_vol": "11",
+                    "location": "Porto, Portugal"
+                  },
+                  "price": 25,
+                  "discount": 0,
+                  "image_url": "https://www.winespiritus.com/5767-large_default/porto-ferreira-tawny-vino-oporto.jpg"
+                },
+                "quantity": 5
+              },
+              {
+                "product": {
+                  "_id": "664e16475bf80806d8c82971",
+                  "product_name": "Prisma Pinot Noir Rosé",
+                  "description": {
+                    "alc_vol": "13",
+                    "location": "Casablanca, Itata, and Maule"
+                  },
+                  "price": 17,
+                  "discount": 0,
+                  "image_url": "https://132373155.cdn6.editmysite.com/uploads/1/3/2/3/132373155/s778301575987528839_p33_i1_w2560.jpeg?width=2400&optimize=medium"
+                },
+                "quantity": 2
+              }
+            ]
+          }
+        ```
+
   * Private:
-     * Get All Orders               | [GET]     - { admin/order/user/:id }
-     * Get Order By User Id         | [GET]     - { admin/order/user/:id }
-     * Get Order By Id              | [GET]     - { admin/order/:id }
-     * Update Order Status          | [PUT]     - { admin/order/update/:id }
+     * Get All Orders               | [GET]     - { admin/order/all }
+                                             
+        ```
+          Require Admin token in header
+
+          Res JSON
+          [
+            "_id": "66564330212ec787f85cfcaf",
+            "user_id_ref": "664e18135bf80806d8c82976",
+            "payment_method": "Pago en entrega",
+            "payment_price": 180,
+            "status": "Received",
+            "address": "Infantado, Loures, PT",
+            "array_products": [
+              {
+                "product": {
+                  "_id": "664e16475bf80806d8c82971",
+                  "product_name": "Prisma Pinot Noir Rosé",
+                  "description": {
+                    "alc_vol": "13%",
+                    "location": "Casablanca, Itata, and Maule"
+                  },
+                  "price": 17,
+                  "discount": 0,
+                  "image_url": "https://132373155.cdn6.editmysite.com/uploads/1/3/2/3/132373155/s778301575987528839_p33_i1_w2560.jpeg?width=2400&optimize=medium"
+                },
+                "quantity": 2
+              },
+              {
+                "product": {
+                  "_id": "6652231f2031e51a6c062475",
+                  "product_name": "Viño Do Porto",
+                  "description": {
+                    "alc_vol": "11%",
+                    "location": "Porto, Portugal"
+                  },
+                  "price": 25,
+                  "discount": 0,
+                  "image_url": "https://www.winespiritus.com/5767-large_default/porto-ferreira-tawny-vino-oporto.jpg"
+                },
+                "quantity": 3
+              }
+            ]
+          ]
+        ```
+    
+     * Get Order By User ID         | [GET]     - { admin/order/user/:id }
+
+        ```
+          Require Admin token in header
+        ```
+
+     * Get Order By ID              | [GET]     - { admin/order/:id }
+
+        ```
+          Require Admin token in header
+        ```
+
+     * Update Order Status By ID    | [PUT]     - { admin/order/update/:id }
+                                             
+        ```
+          Require User token in header
+          
+          Body JSON
+          {
+            "status": "Delivered"
+          }
+
+          Res JSON
+          {
+            "acknowledged": true,
+            "insertedId": "6679bfb09e6e4926249f807c"
+          }
+        ```
+
      * Delete Order By Id           | [DELETE]  - { admin/order/delete/:id }
+
+        ```
+          Require User token in header
+
+          Res JSON
+          {
+            "acknowledged": true,
+            "deletedCount": 1
+          }
+        ```
 
 
 
