@@ -1,6 +1,7 @@
 const authFunc = require("../db/authFunc");
 const argon2 = require("argon2");
 const jwtService = require("../services/jwtService");
+const { use } = require("../routes/cartRouter");
 
 async function userRegister(req, res) {
     const { email, password, name } = req.body;
@@ -53,8 +54,7 @@ async function userLogin(req, res) {
     res.json({
         status: "Ok",
         message: "User logged in",
-        token, 
-        id: user._id,
+        token
     });
 
 }
@@ -78,8 +78,123 @@ async function deleteUserById(req, res) {
     });
 }
 
+async function updateUserName(req, res) {
+    const id = req.userData.userId;
+    const { name } = req.body;
+    const user = await authFunc.updateUserName(id, name)
+    res.json({
+        status: "OK",
+        message: "Username Updated",
+        user
+    })
+}
+
+async function updateUserNameById(req, res) {
+    const { id } = req.params;
+    const { name } = req.body;
+    const user = await authFunc.updateUserName(id, name)
+    if (user) {
+        res.json({
+            status: "OK",
+            message: "Username Updated",
+            user
+        })
+    } else {
+        res.json({
+            status: "Error",
+            message: "User doesn't exist",
+            user
+        })
+    }
+}
+
+async function updateUserEmail(req, res) {
+    const id = req.userData.userId;
+    const { email } = req.body;
+    const emailExist = await authFunc.getUserByEmail(email);
+
+    if (!emailExist) {
+        const user = await authFunc.updateUserEmail(id, email);
+        res.json({
+            status: "OK",
+            message: "Email Updated",
+            user
+        })
+    } else {
+        res.json({
+            status: "Error",
+            message: "The email is already being used"
+        })
+    }
+}
+
+async function updateUserEmailById(req, res) {
+    const { id } = req.params;
+    const { email } = req.body;
+    const emailExist = await authFunc.getUserByEmail(email);
+
+    if (!emailExist) {
+        const user = await authFunc.updateUserEmail(id, email);
+        if (user) {
+            res.json({
+                status: "OK",
+                message: "Email Updated",
+                user
+            })
+        } else {
+            res.json({
+                status: "Error",
+                message: "User doesn't exist",
+                user
+            })
+        }
+    } else {
+        res.json({
+            status: "Error",
+            message: "The email is already being used"
+        })
+    }
+}
+
+async function updateUserPassword(req, res) {
+    const id = req.userData.userId;
+    const { password } = req.body;
+    const hash = await argon2.hash(password);
+    const user = await authFunc.updateUserPassword(id, hash)
+    res.json({
+        status: "OK",
+        message: "Password Updated",
+        user
+    })
+}
+
+async function updateUserPasswordById(req, res) {
+    const { id } = req.params;
+    const { password } = req.body;
+    const hash = await argon2.hash(password);
+    const user = await authFunc.updateUserPassword(id, hash)
+    if (user) {
+        res.json({
+            status: "OK",
+            message: "Password Updated",
+            user
+        })
+    } else {
+        res.json({
+            status: "Error",
+            message: "User doesn't exist",
+            user
+        })
+    }
+}
 module.exports = {
     userRegister,
     userLogin,
-    deleteUserById
+    deleteUserById,
+    updateUserName,
+    updateUserNameById,
+    updateUserEmail,
+    updateUserEmailById,
+    updateUserPassword,
+    updateUserPasswordById
 }
