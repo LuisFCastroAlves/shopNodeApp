@@ -1,5 +1,10 @@
-const { ObjectId } = require('mongodb');
+/* IMPORTS */
+
+// MongoDB Functions
 const { connectToDB } = require('./connectToDB');
+const { ObjectId } = require('mongodb');
+
+/* FUNCTIONS */
 
 // ADD PRODUCT
 async function addProduct(params) {

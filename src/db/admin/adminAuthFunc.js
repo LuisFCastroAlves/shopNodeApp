@@ -1,7 +1,13 @@
-const { ObjectId } = require('mongodb');
-const cartFunc = require('../cartFunc');
+// IMPORT MongoDB
 const { connectToDB } = require('../connectToDB');
+const { ObjectId } = require('mongodb');
 
+// IMPORT Cart Functions
+const cartFunc = require('../cartFunc');
+
+/* FUNCTIONS */
+
+// ADMIN REGISTER
 async function adminRegister(userParams, hash) {
     try {
         const admins = await connectToDB("admins");
@@ -28,6 +34,7 @@ async function adminRegister(userParams, hash) {
     }
 }
 
+// GET ADMIN BY EMAIL
 async function getAdminByEmail(email) {
     try {
         const admins = await connectToDB("admins");
@@ -45,6 +52,7 @@ async function getAdminByEmail(email) {
     }
 }
 
+// DELETE ADMIN BY ID
 async function deleteAdminById(id) {
     try {
         const admins = await connectToDB("admins");
@@ -60,6 +68,7 @@ async function deleteAdminById(id) {
     }
 }
 
+// UPDATE ADMIN NAME
 async function updateAdminName(id, params) {
     try {
         const admins = await connectToDB("admins");
@@ -77,6 +86,7 @@ async function updateAdminName(id, params) {
     }
 }
 
+// UPDATE ADMIN EMAIL
 async function updateAdminEmail(id, params) {
     try {
         const admins = await connectToDB("admins");
@@ -94,6 +104,7 @@ async function updateAdminEmail(id, params) {
     }
 }
 
+// UPDATE ADMIN PASSWORD
 async function updateAdminPassword(id, params) {
     try {
         const admins = await connectToDB("admins");

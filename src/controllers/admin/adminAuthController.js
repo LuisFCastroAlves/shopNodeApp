@@ -1,7 +1,17 @@
+/* IMPORTS */
+
+// Authentication Functions
 const authFunc = require("../../db/admin/adminAuthFunc");
+
+// Argon2
 const argon2 = require("argon2");
+
+// JwtService Functions
 const jwtService = require("../../services/jwtService");
 
+/* Controller Functions */
+
+// ADMIN REGISTER
 async function adminRegister(req, res) {
     const { email, password, name } = req.body;
     const adminParams = {
@@ -25,6 +35,7 @@ async function adminRegister(req, res) {
 
 }
 
+// ADMIN LOGIN
 async function adminLogin(req, res) {
     const { email, password } = req.body;
 
@@ -58,6 +69,7 @@ async function adminLogin(req, res) {
 
 }
 
+// DELETE ADMIN BY ID
 async function deleteAdminById(req, res) {
     const { id } = req.params;
     const admin = await authFunc.deleteAdminById(id);
@@ -77,6 +89,7 @@ async function deleteAdminById(req, res) {
     });
 }
 
+// UPDATE ADMIN NAME
 async function updateAdminName(req, res) {
     const id = req.userData.userId;
     const { name } = req.body;
@@ -88,6 +101,7 @@ async function updateAdminName(req, res) {
     })
 }
 
+// UPDATE ADMIN EMAIL
 async function updateAdminEmail(req, res) {
     const id = req.userData.userId;
     const { email } = req.body;
@@ -108,6 +122,7 @@ async function updateAdminEmail(req, res) {
     }
 }
 
+// UPDATE ADMIN PASSWORD
 async function updateAdminPassword(req, res) {
     const id = req.userData.userId;
     const { password } = req.body;

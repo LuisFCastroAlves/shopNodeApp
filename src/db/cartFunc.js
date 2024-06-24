@@ -1,5 +1,10 @@
-const { ObjectId } = require('mongodb');
+/* IMPORTS */
+
+// MongoDB Functions
 const { connectToDB } = require('./connectToDB');
+const { ObjectId } = require('mongodb');
+
+/* FUNCTIONS */
 
 // CREATE CART 
 async function createCart(id) {
@@ -116,7 +121,6 @@ async function deleteProductFromCart(id, params) {
     try {
 
         const cartList = await connectToDB('cart');
-        console.log(params);
         const deleteProduct = await cartList.updateOne(
             { user_id_ref: ObjectId.createFromHexString(id) },
             {

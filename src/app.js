@@ -1,23 +1,33 @@
+/* IMPORTS */
+
+// .ENV
 require("dotenv").config();
+
+// Public Routers
 const cartRouter = require("./routes/cartRouter") 
 const productRouter = require("./routes/productRouter")
 const orderRouter = require("./routes/orderRouter")
 const authRouter = require("./routes/authRouter")
 
-//ROUTES ADMIN
+// Private Routers
 const productRouter_Admin = require("./routes/admin/productRouter_Admin")
 const orderRouter_Admin = require("./routes/admin/orderRouter_Admin")
 const authRouter_Admin = require("./routes/admin/authRouter_Admin")
 const adminAuthRouter_Admin = require("./routes/admin/adminAuthRouter_Admin")
 
 
-//# EXPRESS & CORS
+// Express Functions
 const express = require("express");
+
+// Cors Function
 const cors = require("cors");
 
+
+/* Server */
+
+// CREATE & CONFIG SERVER
 const app = express();
 const port = 3000;
-
 app.use(cors());
 app.use(express.json());
 

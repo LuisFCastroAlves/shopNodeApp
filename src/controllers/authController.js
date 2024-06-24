@@ -1,8 +1,19 @@
-const authFunc = require("../db/authFunc");
+/* IMPORTS */
+// Argon2
 const argon2 = require("argon2");
+
+// Authentication Functions
+const authFunc = require("../db/authFunc");
+
+// JWTSERVICE Functions
 const jwtService = require("../services/jwtService");
+
+// Cart Router
 const { use } = require("../routes/cartRouter");
 
+/* Controller Functions */
+
+// USER REGISTER
 async function userRegister(req, res) {
     const { email, password, name } = req.body;
     const userParams = {
@@ -26,6 +37,7 @@ async function userRegister(req, res) {
 
 }
 
+// USER LOGIN
 async function userLogin(req, res) {
     const { email, password } = req.body;
 
@@ -59,6 +71,7 @@ async function userLogin(req, res) {
 
 }
 
+// DELETE USER BY ID
 async function deleteUserById(req, res) {
     const { id } = req.params;
     const user = await authFunc.deleteUserById(id);
@@ -78,6 +91,7 @@ async function deleteUserById(req, res) {
     });
 }
 
+// UPDATE USERNAME
 async function updateUserName(req, res) {
     const id = req.userData.userId;
     const { name } = req.body;
@@ -89,6 +103,7 @@ async function updateUserName(req, res) {
     })
 }
 
+// UPDATE USERNAME BY ID
 async function updateUserNameById(req, res) {
     const { id } = req.params;
     const { name } = req.body;
@@ -108,6 +123,7 @@ async function updateUserNameById(req, res) {
     }
 }
 
+// UPDATE USER EMAIL
 async function updateUserEmail(req, res) {
     const id = req.userData.userId;
     const { email } = req.body;
@@ -128,6 +144,7 @@ async function updateUserEmail(req, res) {
     }
 }
 
+// UPDATE USER EMAIL BY ID
 async function updateUserEmailById(req, res) {
     const { id } = req.params;
     const { email } = req.body;
@@ -156,6 +173,7 @@ async function updateUserEmailById(req, res) {
     }
 }
 
+//UPDATE USER PASSWORD
 async function updateUserPassword(req, res) {
     const id = req.userData.userId;
     const { password } = req.body;
@@ -168,6 +186,7 @@ async function updateUserPassword(req, res) {
     })
 }
 
+//UPDATE USER PASSWORD BY ID
 async function updateUserPasswordById(req, res) {
     const { id } = req.params;
     const { password } = req.body;
@@ -187,6 +206,7 @@ async function updateUserPasswordById(req, res) {
         })
     }
 }
+
 module.exports = {
     userRegister,
     userLogin,

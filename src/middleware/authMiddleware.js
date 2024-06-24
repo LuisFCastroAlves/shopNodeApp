@@ -1,5 +1,11 @@
+/* IMPORTS */
+
+// JwtService Functions
 const jwtService = require("../services/jwtService");
 
+/* Middleware Functions */
+
+// AUTHENTICATION
 function authMiddleware(req, res, next) {
     const { token } = req.headers;
 

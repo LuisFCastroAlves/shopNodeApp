@@ -1,7 +1,12 @@
-const jwt = require("jsonwebtoken");
+/* IMPORTS */
 
+// Jwt Functions
+const jwt = require("jsonwebtoken");
 const jwtSecret = "superSecretPrivateKey";
 
+/* JwtServices Functions */
+
+// CREATE TOKEN
 function createToken(userId, email) {
     
     const tokenPayload = {
@@ -16,6 +21,7 @@ function createToken(userId, email) {
     return token;
 }
 
+// VERIFY TOKEN
 function verifyToken(token) {
     let payload;
     try {

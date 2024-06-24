@@ -1,7 +1,16 @@
-const { ObjectId } = require('mongodb');
+/* IMPORTS */ 
+
+// MongoDB Functions
 const { connectToDB } = require('./connectToDB');
+const { ObjectId } = require('mongodb');
+
+// Cart Functions
 const cartFunc = require('./cartFunc');
+
+// Products Functions
 const { getProductById } = require('./productListFunc');
+
+/* FUNCTIONS */
 
 // CREATE ORDER
 async function createOrder(id, params) {
@@ -34,7 +43,7 @@ async function createOrder(id, params) {
 
 }
 
-// Get All Orders
+// GET ALL ORDERS
 async function getAllOrders() {
     try {
         const ordersList = await connectToDB('orders');
@@ -110,7 +119,6 @@ async function deleteOrderById(id) {
     }
 
 }
-
 
 module.exports = {
     createOrder,

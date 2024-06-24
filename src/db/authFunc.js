@@ -1,7 +1,15 @@
-const { ObjectId } = require('mongodb');
-const cartFunc = require('./cartFunc');
-const { connectToDB } = require('./connectToDB');
+/* IMPORTS */ 
 
+// MongoDB Functions
+const { connectToDB } = require('./connectToDB');
+const { ObjectId } = require('mongodb');
+
+// Cart Functions
+const cartFunc = require('./cartFunc');
+
+/* FUNCTIONS */
+
+// USER REGISTER
 async function userRegister(userParams, hash) {
     try {
         const users = await connectToDB("users");
@@ -29,6 +37,7 @@ async function userRegister(userParams, hash) {
     }
 }
 
+// GET USER BY EMAIL
 async function getUserByEmail(email) {
     try {
         const users = await connectToDB("users");
@@ -46,6 +55,7 @@ async function getUserByEmail(email) {
     }
 }
 
+// DELETE USER BY ID
 async function deleteUserById(id) {
     try {
         const users = await connectToDB("users");
@@ -61,6 +71,7 @@ async function deleteUserById(id) {
     }
 }
 
+// UPDATE USERNAME
 async function updateUserName(id, params) {
     try {
         const users = await connectToDB("users");
@@ -78,6 +89,7 @@ async function updateUserName(id, params) {
     }
 }
 
+// UPDATE USER EMAIL
 async function updateUserEmail(id, params) {
     try {
         const users = await connectToDB("users");
@@ -95,6 +107,7 @@ async function updateUserEmail(id, params) {
     }
 }
 
+// UPDATE USER PASSWORD
 async function updateUserPassword(id, params) {
     try {
         const users = await connectToDB("users");
