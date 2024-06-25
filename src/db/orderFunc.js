@@ -1,4 +1,4 @@
-/* IMPORTS */ 
+/* IMPORTS */
 
 // MongoDB Functions
 const { connectToDB } = require('./connectToDB');
@@ -17,21 +17,28 @@ async function createOrder(id, params) {
     try {
         const orderList = await connectToDB('orders');
         const userCart = await cartFunc.getCartByUserId(id);
+        var price = 0;
         const productsArray = await Promise.all(userCart.array_products.map(async (product) => {
             const productObject = {
                 product: await getProductById(product.product_id_ref.toString()),
                 quantity: product.quantity
             }
+            if (productObject.product.status !== "deleted") {
+                price = price + ((productObject.product.price - (productObject.product.price * productObject.product.discount) / 100) * productObject.quantity);
+            }
             return productObject
-        }))
+        }));
+
+        const filteredProductsArray = productsArray.filter(product => product.product.status !== "deleted");
+
         const newOrder = await orderList.insertOne(
             {
                 "user_id_ref": ObjectId.createFromHexString(id),
                 "payment_method": params.payment_method,
-                "payment_price": params.payment_price,
+                "payment_price": price,
                 "status": "pending",
                 "address": params.address,
-                "array_products": productsArray
+                "array_products": filteredProductsArray
             }
         )
         await cartFunc.deleteAllProductsFromCart(id);

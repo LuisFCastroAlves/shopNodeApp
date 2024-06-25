@@ -535,7 +535,6 @@ Submission deadline is on the `31st of June` To submit the project, send us an e
           Body JSON
           {
             "payment_method": "Cash",
-            "payment_price": "50",
             "address": "Infantado, Loures, Lisboa, Portugal"
           }
 
