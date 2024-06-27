@@ -30,20 +30,21 @@ async function createOrder(id, params) {
         }));
 
         const filteredProductsArray = productsArray.filter(product => product.product.status !== "deleted");
-
-        const newOrder = await orderList.insertOne(
-            {
-                "user_id_ref": ObjectId.createFromHexString(id),
-                "payment_method": params.payment_method,
-                "payment_price": price,
-                "status": "pending",
-                "address": params.address,
-                "array_products": filteredProductsArray
-            }
-        )
-        await cartFunc.deleteAllProductsFromCart(id);
-        return newOrder
-
+        if (filteredProductsArray.length > 0) {
+            const newOrder = await orderList.insertOne(
+                {
+                    "user_id_ref": ObjectId.createFromHexString(id),
+                    "payment_method": params.payment_method,
+                    "payment_price": price,
+                    "status": "pending",
+                    "address": params.address,
+                    "array_products": filteredProductsArray
+                }
+            )
+            await cartFunc.deleteAllProductsFromCart(id);
+            return newOrder
+        }
+        return "error";
     } catch (error) {
         console.error("Error:", error);
     }

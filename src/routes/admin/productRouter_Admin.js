@@ -24,6 +24,6 @@ router.post("/add", authMiddleware, productController.addProduct);
 router.put("/update/:id", authMiddleware, productController.updateProductById);
 
 // DELETE PRODUCT BY ID [DELETE] => "/remove/:id"
-router.delete("/remove/:id", authMiddleware, productController.deleteProductById);
+router.put("/remove/:id", authMiddleware, productController.deleteProductById);
 
 module.exports = router;

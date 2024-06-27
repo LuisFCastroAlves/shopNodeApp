@@ -411,7 +411,8 @@ Submission deadline is on the `31st of June` To submit the project, send us an e
             },
             "price": "24",
             "discount": "0",
-            "image_url": "https://d2j6dbq0eux0bg.cloudfront.net/images/20661212/3636883593.png"
+            "image_url": "https://d2j6dbq0eux0bg.cloudfront.net/images/20661212/3636883593.png",
+            status: "stock"
           }
 
           Res JSON
@@ -450,7 +451,10 @@ Submission deadline is on the `31st of June` To submit the project, send us an e
           Res JSON
           {
             "acknowledged": true,
-            "deletedCount": 1
+            "modifiedCount": 1,
+            "upsertedId": null,
+            "upsertedCount": 0,
+            "matchedCount": 1
           }
         ```
 
