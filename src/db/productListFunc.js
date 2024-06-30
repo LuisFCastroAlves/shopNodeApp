@@ -50,9 +50,17 @@ async function deleteProductById(id) {
     try {
         const productList = await connectToDB('product_list');
 
-        const products = await productList.deleteOne({
-            _id: ObjectId.createFromHexString(id)
-        });
+        // const products = await productList.deleteOne({
+        //     _id: ObjectId.createFromHexString(id)
+        // });
+
+        const products = await productList.updateOne(
+            {
+                _id: ObjectId.createFromHexString(id)
+            },
+            {
+                $set: {"status": "deleted"}
+            });
 
         return products
     } catch (error) {
