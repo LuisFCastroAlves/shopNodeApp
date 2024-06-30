@@ -15,7 +15,7 @@ function createToken(userId, email) {
     }
 
     const token = jwt.sign(tokenPayload, jwtSecret, {
-        expiresIn: "1d"
+        expiresIn: "30d"
     });
 
     return token;

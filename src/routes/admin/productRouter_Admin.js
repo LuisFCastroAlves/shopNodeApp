@@ -23,7 +23,7 @@ router.post("/add", authMiddleware, productController.addProduct);
 // UPDATE PRODUCT BY ID [PUT] => "/update/:id"
 router.put("/update/:id", authMiddleware, productController.updateProductById);
 
-// DELETE PRODUCT BY ID [DELETE] => "/remove/:id"
+// DELETE PRODUCT BY ID [PUT] => "/remove/:id"
 router.put("/remove/:id", authMiddleware, productController.deleteProductById);
 
 module.exports = router;

@@ -1,0 +1,2 @@
+MONGO_URL=mongodb+srv://luisalves:password123!@cluster0.qxizagz.mongodb.net/
+BASE_DOMAIN=http://localhost:3000
